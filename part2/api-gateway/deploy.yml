@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-deployment
+  labels:
+    name: apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: apigateway
+  template:
+    metadata:
+      labels:
+        name: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: melinaci/apigateway
+        ports:
+        - containerPort: 5000
+        env:
+        - name: NODE_ENDPOINT
+          value: "http://node"
