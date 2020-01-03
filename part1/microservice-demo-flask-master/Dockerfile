@@ -20,5 +20,5 @@ ADD . /app
 
 EXPOSE 6000
 
-CMD flask run --host=0.0.0.0
+CMD python ./src/app.py
 
