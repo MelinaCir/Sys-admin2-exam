@@ -1,0 +1,35 @@
+version: '3'
+services:
+  # Frontend service
+  frontend:
+    build: ./microservice-demo-frontend-master
+    ports:
+      - "5000:5000"
+  # Node service
+  node:
+    build: ./microservice-demo-node-master
+    ports:
+      - "4000:4000"
+    depends_on:
+        - redis
+  redis:
+    image: redis:alpine
+    expose:
+        - "6379"
+    #volumes:
+     #   - redis:/data
+  # API gateway
+  apigateway:
+    build: ./microservice-demo-apigateway-master
+    ports:
+      - "8010:8010"
+  # Flask service
+  flask:
+    build: ./microservice-demo-flask-master/src
+    ports:
+      - "8000:8000"
+  # Go service
+  go:
+    build: ./microservice-demo-go-master/src
+    ports:
+      - "8080:8080"
