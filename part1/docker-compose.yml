@@ -1,34 +1,40 @@
 version: '3'
 services:
-  # Frontend service
+  # Frontend service (8000)
   frontend:
     build: ./microservice-demo-frontend-master
     ports:
-      - "5000:5000"
-  # Node service
+      - "8000:8000"
+  # Node service running on port 4000
   node:
     build: ./microservice-demo-node-master
     ports:
       - "4000:4000"
-    depends_on:
-        - redis
+    links:
+      - redis
+    environment:
+      - REDIS_URL=redis://cache
+  # Redis database for node application
   redis:
-    image: redis:alpine
+    image: redis
+    container_name: cache
     expose:
         - "6379"
-    #volumes:
-     #   - redis:/data
-  # API gateway
+  # API gateway (5000)
   apigateway:
     build: ./microservice-demo-apigateway-master
     ports:
-      - "8010:8010"
-  # Flask service
+      - "5000:5000"
+    environment: 
+      - NODE_ENDPOINT=http://node:4000/
+      - GO_ENDPOINT=http://go:8080/
+      - FLASK_ENDPOINT=http://flask:8010/
+  # Flask service (8010)
   flask:
     build: ./microservice-demo-flask-master/src
     ports:
-      - "8000:8000"
-  # Go service
+      - "8010:8010"
+  # Go service running on port 8080
   go:
     build: ./microservice-demo-go-master/src
     ports:

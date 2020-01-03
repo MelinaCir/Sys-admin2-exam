@@ -18,6 +18,6 @@ RUN pip install -r requirements.txt
 
 ADD . /app
 
-EXPOSE 8000
+EXPOSE 6000
 
 CMD flask run --host=0.0.0.0

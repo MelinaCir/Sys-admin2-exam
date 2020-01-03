@@ -1,7 +1,7 @@
 FROM node:alpine
-LABEL maintaniner="mc222ap@student.lnu.se"
+LABEL maintainer="mc222ap@student.lnu.se"
 
-EXPOSE 8080
+EXPOSE 8000
 
 ENV INSTALL_PATH /var/www/app
 RUN mkdir -p $INSTALL_PATH
