@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels:
+    name: frontend
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - image: melinaci/frontend-app
+        name: frontend
+        ports:
+        - containerPort: 80
