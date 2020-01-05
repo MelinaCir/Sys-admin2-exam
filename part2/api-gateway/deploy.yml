@@ -20,5 +20,9 @@ spec:
         ports:
         - containerPort: 5000
         env:
+        - name: GO_ENDPOINT
+          value: "http://go"
         - name: NODE_ENDPOINT
           value: "http://node"
+        - name: FLASK_ENDPOINT
+          value: "http://flask"

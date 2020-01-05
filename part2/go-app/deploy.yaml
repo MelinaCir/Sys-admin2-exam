@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels:
+    name: go
+  name: go-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: go
+  template:
+    metadata:
+      labels:
+        name: go
+    spec:
+      containers:
+      - image: melinaci/goapp
+        name: goapp
+        ports:
+        - containerPort: 8080
