@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  labels: 
+    name: redisdb
+  name: redis-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: redisdb
+    spec:
+      containers:
+      - image: redis
+        name: redisdb
+        ports:
+        - name: redisdb
+          containerPort: 6379
+          hostPort: 6379
+        volumeMounts:
+            - name: redis-database
+              mountPath: /data/db
+      volumes:
+        - name: redis-database
+          cinder:
+            volumeID: 79667d93-5bfe-4cc4-b20d-8b74b95ec065
+            fsType: ext4

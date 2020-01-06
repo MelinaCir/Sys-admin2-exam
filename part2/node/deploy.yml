@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels:
+    name: node
+  name: node
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: node
+  template:
+    metadata:
+      labels:
+        name: node
+    spec:
+      containers:
+      - image: melinaci/nodeapp
+        name: node
+        ports:
+        - containerPort: 4000
+        env:
+        - name: REDIS_URL
+          value: "http://redisdb:6379"
