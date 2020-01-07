@@ -15,7 +15,7 @@ spec:
         name: frontend
     spec:
       containers:
-      - image: melinaci/frontend-app
+      - image: melinaci/frontend-app:1.2
         name: frontend
         ports:
         - containerPort: 80
